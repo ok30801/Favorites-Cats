@@ -9,6 +9,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,  minmax(225px, 1fr));
     gap: 48px;
+    @media (max-width: 1356px) {
+      gap: 20px;
+    }
   }
 
   &__photo{

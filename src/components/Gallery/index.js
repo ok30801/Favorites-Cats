@@ -16,7 +16,8 @@ const Gallery = ({data, action, type}) => {
                         data.map(item => (
                             <div key={item.id} className="Gallery__photo">
                                 <img src={item.url} alt={item.id}/>
-                                <div className="Gallery__favoriteIcon" onClick={() => dispatch(action(item))}>
+                                <div className="Gallery__favoriteIcon"
+                                     onClick={() => type === 'allCats' ? dispatch(action(item)) : dispatch(action(item.id))}>
                                     {
                                         type === 'allCats'
                                             ? <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}/>
