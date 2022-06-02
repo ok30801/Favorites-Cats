@@ -1,14 +1,12 @@
 import Layout from '../../hoc'
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import {Checkbox} from '@material-ui/core'
-import {Favorite, FavoriteBorder} from '@mui/icons-material'
-import {useDispatch} from 'react-redux'
 import {setFavoritesCatsAC} from '../../store/actions/actions'
+import Gallery from '../../components/Gallery'
+import Loader from '../../components/Loader'
 import './style.scss'
 
 const Main = () => {
-    const dispatch = useDispatch()
     const [cats, setCats] = useState([])
 
     useEffect(() => {
@@ -27,20 +25,9 @@ const Main = () => {
 
     return (
         <Layout>
-            <div className="Main">
-                <div className="Main__container">
-                    {
-                        cats.map(item => (
-                            <div key={item.id} className="Main__photo">
-                                <img src={item.url} alt={item.id}/>
-                                <div className="Main__favoriteIcon" onClick={() => dispatch(setFavoritesCatsAC(item))}>
-                                    <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}/>
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
+            {
+                !cats.length ? <Loader/> : <Gallery data={cats} action={setFavoritesCatsAC} type={'allCats'}/>
+            }
         </Layout>
     )
 }
